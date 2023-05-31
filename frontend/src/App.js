@@ -1,7 +1,10 @@
 import './App.css';
 import { createClient } from '@supabase/supabase-js';
 import Title from './components/Title';
-import Button from './components/PrimaryButton';
+import PrimaryButton from './components/PrimaryButton';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import DashboardPage from './pages/DashboardPage';
 
 
 
@@ -18,33 +21,13 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 
 function App() {
-
-  const signInWithGithub = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        scopes: "codespace,repo",
-      }
-    })
-
-    console.log(data);
-
-    if (error) {
-      console.log('Error signing in with GitHub:', error.message)
-    }
-  }
-
   return (
-    <div className="grid grid-cols-2 p-4 h-screen">
-      <div className="flex flex-col justify-center">
-        <Title title="reposurrection." subtitle="breathe a second life into your dead repos." className="px-12" />
-      </div>
-      <div className="flex flex-col h-full w-full justify-center items-center">
-
-        {/* Note: the onClick functionality is the same as the previous GitHub button. */}
-        <Button text="sign in with GitHub" onClick={signInWithGithub} className="w-1/2 bg-gray-300 hover:bg-blue-700 text-black text-2xl font-medium py-7 px-6 rounded rounded-xl mx-12" />
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -18,3 +18,38 @@ code {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.bg-not-quite-white {
+  background-color: #E0E1DD;
+}
+
+/* Blue Colour Theme */
+.bg-rich-black {
+  background-color: #0d1b2a;
+}
+
+.bg-oxford-blue {
+  background-color: #1b263b;
+}
+
+.bg-ym-blue {
+  background-color: #415A77;
+}
+
+.bg-silver-lake-blue {
+  background-color: #778DA9;
+}
+
+.bg-platinum {
+  background-color: #E0E1DD;
+}
+
+input[type="text"] {
+  background-color: transparent;
+  border: none;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}

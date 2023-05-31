@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 
-const Button = ({ text, onClick, className }) => {
+const PrimaryButton = ({ text, onClick, className }) => {
 
     const classes = classNames('text-center', 'justify-center', 'hover:cursor-pointer', 'hover:bg-black', 'hover:text-gray-300', className);
 
@@ -13,4 +13,4 @@ const Button = ({ text, onClick, className }) => {
     );
 };
 
-export default Button;
+export default PrimaryButton;
