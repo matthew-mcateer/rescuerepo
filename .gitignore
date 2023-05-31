@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+bioml_ressurect_app/
 # C extensions
 *.so
 
