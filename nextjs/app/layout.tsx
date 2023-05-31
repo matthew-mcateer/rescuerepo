@@ -20,7 +20,7 @@ export default function RootLayout({
       <body
         className={inter.className}
         style={{
-          backgroundImage: `url("https://framerusercontent.com/images/5oNpsohqItnG7gj1CItFRE5tzE.jpg")`,
+          backgroundImage: `url("https://matthewmcateer.me/media/resurrection/MidJourney_cartoon_bubble_flying_around_in_space.png")`,
           backgroundSize: "55%",
           backgroundPosition: "right 0px top 0px",
           backgroundRepeat: "no-repeat",
