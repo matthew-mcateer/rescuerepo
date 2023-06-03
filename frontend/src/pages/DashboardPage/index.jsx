@@ -43,14 +43,23 @@ const DashboardPage = () => {
 
   const onSearch = (value) => {
     // Send the request to the "/create-dev-environment" endpoint
-    axios.post(backendUrl + '/create-dev-environment', {
+    axios.post('/create-dev-environment', {
       "githubRepoUrl": value,
       "githubAccessToken": accessToken,
       "email": email
     }).then((response) => {
-      console.log(response);
+
+      // Check if the response is successful
+      if (response.request.code === 200) {
+        // Alert the user they will be notified when the codespace is ready
+        alert("You will be notified when your codespace is ready!");
+      } else {
+        // Alert the user that something went wrong
+        alert("Something went wrong!");
+      }
+
     }).catch((error) => {
-      console.log(error);
+      alert("Something went wrong!");
     });
   };
 
