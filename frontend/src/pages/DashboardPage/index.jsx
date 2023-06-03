@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import Search from '../../components/Search';
+import axios from 'axios';
+
+
+const isDevelopment = false;
+
+var backendUrl = "http://localhost:8000";
+
+if (isDevelopment) {
+  backendUrl = "http://localhost:8000";
+}
 
 
 const DashboardPage = () => {
   // const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
 
   useEffect(() => {
     // Get the supabase token from storage
@@ -18,11 +30,28 @@ const DashboardPage = () => {
       // Fetch the user from the data
       const dataUser = data.user;
       setUser(dataUser);
+
+      // Fetch the access token from the data
+      const dataAccessToken = data.access_token;
+      setAccessToken(dataAccessToken);
+
+      // Fetch the email from the data
+      const dataEmail = dataUser.email;
+      setEmail(dataEmail);
     }, 1000);
   }, []);
 
   const onSearch = (value) => {
-    // TODO: Implement search functionality.
+    // Send the request to the "/create-dev-environment" endpoint
+    axios.post(backendUrl + '/create-dev-environment', {
+      "githubRepoUrl": value,
+      "githubAccessToken": accessToken,
+      "email": email
+    }).then((response) => {
+      console.log(response);
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   return (
