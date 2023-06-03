@@ -20,77 +20,46 @@ const LandingPage = () => {
 	console.log("LandingPage rendered");
 
 	const navigate = useNavigate();
-	const { signInWithGithub, user, setUser } = useAuth();
+	const { session, user, setUser, login, logout } = useAuth();
 	const { auth } = supabase;
 
-	const handleLogin = async (event) => {
+	// const handleLogin = async (event) => {
+	// 	console.log("handleLogin called");
 
-		event.preventDefault();
-
-		// console.log(event);
-
-		try {
-
-			// Login to GitHub
-			console.log("Logging in to GitHub");
-			setUser(1);
-			const { user, session, error } = await signInWithGithub();
-
-			console.log("User is: ", user);
-			console.log("Session is: ", session);
-			console.log("Error is: ", error);
-
-
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	useEffect(() => {
-		// Check for a valid token in storage
-		const token = localStorage.getItem('sb-jkohjbndimwjcyobeuaf-auth-token');
-
-		if (token) {
-			// If there is a token, set the user
-			// try {
-			// 	const { user } = supabase.auth.api.getUser(token);
-			// 	setUser(user);
-			// }
-			console.log("Token is: ", token);
-
-			// Parse the token to a JSON object
-			const tokenObject = JSON.parse(token);
-
-			console.log("Token object is: ", tokenObject);
-		}
-	}, []);
-
-
-	// useEffect(() => {
-	// 	const { data: authListener } = auth.onAuthStateChange((event, session) => {
-	// 		console.log("inside auth listener");
-	// 		if (event === "SIGNED_IN" || event === "INITIAL_SESSION") {
-	// 			const { user } = session || {};
-	// 			setUser(user);
-	// 			// navigate("/dashboard");
-	// 		} else {
-	// 			setUser(null);
-	// 		}
-	// 	});
-
-	// 	return () => {
-	// 		authListener.subscription.unsubscribe();
-	// 	};
-	// }, []);
-
-	// useEffect(() => {
-	// 	console.log("User is: ", user);
-	// 	if (user) {
-	// 		navigate("/dashboard");
-	// 	} else {
-	// 		console.log("User is null");
+	// 	// TODO: Try to log the user on via GitHub and find a way to set the user in the context
+	// 	try {
+	// 		await login();
+	// 	} catch (error) {
+	// 		console.log("Error logging in: ", error);
 	// 	}
-	// }, [user]);
+
+	// };
+
+	async function handleLogin() {
+		console.log("handleLogin called");
+
+		const { error } = await login();
+
+		if (error) {
+			console.log("Error logging in: ", error);
+		} else {
+			console.log("User logged in");
+			navigate('/dashboard');
+		}
+	}
+
+	// useEffect(() => {
+	// 	// Check if the user is logged in. If so, navigate to the dashboard
+	// 	console.log("useEffect called");
+
+	// 	if (session && user) {
+	// 		navigate('/dashboard');
+	// 	} else {
+	// 		console.log("No user logged in");
+	// 		console.log("session: ", session);
+	// 		console.log("user: ", user);
+	// 	}
+	// }, [session, user]);
 
 	return (
 		<div className="grid grid-cols-2 p-4 h-screen bg-gradient-to-b from-sky-500 to-sky-800">
@@ -98,7 +67,7 @@ const LandingPage = () => {
 				<Title title="reposurrection." subtitle="breathe a second life into your dead repos." className="px-12 text-white" />
 			</div>
 			<div className="flex flex-col h-full w-full justify-center items-center">
-				<Button text="sign in with GitHub" onClick={handleLogin} className="w-1/2 bg-sky-800 hover:bg-sky-500 text-white text-2xl font-medium py-7 px-6 rounded rounded-xl mx-12" />
+				<Button text="sign in with GitHub" onClick={login} className="w-1/2 bg-sky-800 hover:bg-sky-500 text-white text-2xl font-medium py-7 px-6 rounded rounded-xl mx-12" />
 			</div>
 		</div>
 	);
