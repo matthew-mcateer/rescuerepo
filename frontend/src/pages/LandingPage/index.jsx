@@ -17,7 +17,6 @@ const LandingPage = () => {
 	console.log("LandingPage rendered");
 
 	async function handleLogin() {
-		// TODO: Login via GitHub
 		const { error } = await supabase.auth.signInWithOAuth({
 			provider: 'github',
 		});
