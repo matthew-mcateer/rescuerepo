@@ -4,13 +4,20 @@ import { HiSparkles, HiOutlineSparkles } from "react-icons/hi";
 
 
 const Search = ({ onSearch, className }) => {
+  
   const [searchTerm, setSearchTerm] = useState("");
+  const [enteredText, setEnteredText] = useState("");
   const [isHovered, setIsHovered] = useState(false);
 
   const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-    // Perform search functionality here
-    onSearch(event.target.value);
+    event.preventDefault();
+    
+    setSearchTerm(enteredText);
+    onSearch(enteredText);
+  };
+
+  const handleTextChange = (event) => {
+    setEnteredText(event.target.value);
   };
 
   const handleHover = () => {
@@ -43,8 +50,7 @@ const Search = ({ onSearch, className }) => {
             id="search"
             placeholder="Resurrect..."
             className="w-full h-10 py-7 px-6 text-base placeholder-white border rounded-lg focus:shadow-outline"
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
+            onChange={handleTextChange}
         />
         <div className="absolute inset-y-0 right-0 flex items-center px-4 hover:cursor-pointer" onClick={handleSearch} onMouseEnter={handleHover} onMouseLeave={handleHoverEnd}>
         {isHovered ? (
