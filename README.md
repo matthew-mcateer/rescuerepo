@@ -91,11 +91,21 @@ The goal is to make it easier to turn any repo, no matter how old, and turn it i
 
 ### Built With
 
+* [Python](https://www.python.org/)
+* [NextJS](https://nextjs.org/)
 * [OpenAI](https://pytorch.org/)
 * [FastAPI](https://fastapi.tiangolo.com/)
 * [React](https://reactjs.org/)
 * [LangChain](https://docs.langchain.com/docs/)
 * [Supabase](https://supabase.com/)
+* [Docker](https://www.docker.com/)
+* [GitHub Codespaces](https://github.com/codespaces)
+* [Postmark](https://postmarkapp.com/)
+* [Celery](https://docs.celeryq.dev/en/stable/getting-started/first-steps-with-celery.html#first-steps)
+* [RabbitMQ](https://www.rabbitmq.com/)
+* [Heroku](https://www.heroku.com/)
+
+<img src="assets/images/BioML_Hackathon_Blueprint.png" alt="architecture-image" height="350"  id="architecture-image">
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -126,26 +136,71 @@ Here is a list of prerequisites you need to install before you can start using t
   ```bash
   export OPENAI_API_KEY=<your-api-key>
   ```
+
+  your [Anthropic API key](https://console.anthropic.com/account/keys)
   
-  Your [GitHub access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) (make sure it has the `codespace`and `repo` scopes):
+  ```bash
+  export ANTHROPIC_API_KEY=<your-api-key>
+  ```
+  
+  Your [GitHub access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) (make sure it has the `codespace`and `repo` scopes):
   
   ```bash
   export GH_ACCESS_TOKEN=<your-api-key>
   ```
+  <details>
 
-  Your CELERY_BROKER_URL:
+  <summary><b>Getting your properly-scoped GitHub Access token (click to expand)</b></summary>
+
+  - First, log in to your GitHub account.
+  - Click on your profile photo in the upper right corner of any page.
+  - From the dropdown menu, select "Settings."
+  - On the settings page, find "Developer settings" at the bottom of the left-hand side menu and click it.
+  - Now you should see "Personal access tokens" on the left-hand side menu, click it (click the "classic" tokens).
+  - Click "Generate new token" on the Personal access tokens page.
+  - In the "Note" field, enter a descriptive name for this token that will help you recognize its purpose later (e.g., "Token for forking and Codespaces").
+  - To choose the required permissions, you'll need to select the following scopes:
+    - For forking repositories, you will need the "repo" scope which includes 'public_repo' and others.
+    - To create GitHub Codespaces, you will need the 'codespaces' scope which will allow "full access to managing user codespaces."
+    Therefore, you should select both 'repo' and 'codespaces'.
+
+  - Scroll down and click "Generate token" at the bottom of the page.
+  - After you click the "Generate token" button, GitHub will display your new personal access token. Make sure you copy this token value and store it in a secure location. GitHub will not show the token to you again.
+
+
+  </details>
+
+  Your `CELERY_BROKER_URL`:
   
   ```bash
   export CELERY_BROKER_URL=<your-api-key>
   ```
+  <details>
+  
+  <summary><b>Getting your </b><code>CELERY_BROKER_URL</code><b> (click to expand)</b></summary>
 
   If you're using [RabbitMQ](http://www.rabbitmq.com/download.html), you can use `export CELERY_BROKER_URL=pyamqp://guest@localhost//`.
   The demo version of this project is using a [CloudAMQP](https://www.cloudamqp.com/) instance from Heroku (the free "Little Lemur" tier).
 
   Or if you're using redis, you can use `docker run -d -p 6379:6379 redis && export CELERY_BROKER_URL=redis://localhost:6379/0`.
 
+  </details>
 
-3. Install the python dependencies.
+  Your `POSTMARK_API_KEY`:
+  
+  ```bash
+  export POSTMARK_API_KEY=<your-api-key>
+  ```
+  <details>
+  
+  <summary><b>Getting your </b><code>POSTMARK_API_KEY</code><b> (click to expand)</b></summary>
+
+  Set up a https://postmarkapp.com/ account, and see [the developer documentation](https://postmarkapp.com/developer/api/overview).
+
+  </details>
+
+
+1. Install the python dependencies.
 
   ```bash
   $ cd backend
@@ -212,22 +267,35 @@ Sign into GitHub, after which you'll be greeted with the below page.
 
 <img src="assets/images/post_sign_in.png" alt="initial-page" height="100"  id="initial-page-next">
 
-You can enter in a GitHub repo URL of your choice. At the moment the default is `https://github.com/kkroening/ffmpeg-python`.
+You can enter in a GitHub repo URL of your choice. At the moment the default is `https://github.com/richard-peacock/sequence_record_parsing`.
 
 Include with this information your GitHub Access token (make sure it has the `repos` and `codespaces` scopes enabled), as well as your email. 
 
 This will trigger the creation of the GitHub codespace.
+
+If you navigate to the [GitHub Codespaces Dashboard](https://github.com/codespaces), you should see it being created (will resemble the below).
+
+
+<img src="assets/images/codespace_screenshot.png" alt="final-page" height="100"  id="initial-page-final">
 
 <!-- ROADMAP -->
 ## Roadmap
 
 The scope of this project is admittedly quite large, so we've broken it down into a few phases:
 
-- [*] Setting up a workflow for generating dev environments from an arbitrary repo
-    - [*] Creating a fork with a `dockerfile`, `devcontainer.json`, and anything else needed for a GitHub Codespace
-- [ ] Automatically Generated Dev Environments using GPT-4 (or Claude 100k)
-- [ ] Automatically Refactoring Code using GPT-4 (or Claude 100k)
-- [ ] Improving the UI/UX of the above.
+- ✅ Embedding Map of Bioinformatics tools ( [view here](https://fancy-baklava-ee6d10.netlify.app/3d_embedding_exploration_tool) )
+- ✅ Setting up a workflow for generating dev environments from an arbitrary repo
+    - ✅ Creating a fork with a `dockerfile`, `devcontainer.json`, and anything else needed for a GitHub Codespace
+  - ✅ Automatically Generated Dev Environments using GPT-4 (or Claude 100k)
+  - 🚧 Get running environments built without error >50% of the time
+- ✅ Automatically Refactoring Code using GPT-4 (or Claude 100k)
+- 🚧 Translating languages using GPT-4 (or Claude 100k)
+  - ✅ Nextflow-to-Flyte Translaton
+  - 🚧 Nextflow-to-Snakemake Translaton
+  - 🚧 Nextflow-to-Redun Translaton
+  - 🚧 Nextflow-to-CWL Translaton
+  - 🚧 MATLAB-to-Python Translaton
+- 🚧 Improving the UI/UX of the above.
 
 See the [open issues](https://github.com/matthew-mcateer/BioMLHackathon_ResurrectionSquad/issues) for a full list of proposed features (and known issues).
 
@@ -271,6 +339,27 @@ Project Link: [https://github.com/matthew-mcateer/BioMLHackathon_ResurrectionSqu
 ## Acknowledgments
 
 We'd like to thank everyone for their contributions to this project and the hackathon.
+
+<a href="https://github.com/matthew-mcateer">
+  <img src="https://github.com/matthew-mcateer.png?size=50">
+</a>
+
+<a href="https://github.com/ashenafee">
+  <img src="https://github.com/ashenafee.png?size=50">
+</a>
+
+<a href="https://github.com/Shubhamai">
+  <img src="https://github.com/Shubhamai.png?size=50">
+</a>
+
+<a href="https://github.com/asapsav">
+  <img src="https://github.com/asapsav.png?size=50">
+</a>
+
+<a href="https://github.com/lai-joyce">
+  <img src="https://github.com/lai-joyce.png?size=50">
+</a>
+
 
 We would also like to thank the organizers of the [Bio X AI Hackathon](https://hackathon.bio/) for putting on such a great event.
 

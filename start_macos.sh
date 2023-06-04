@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 # Check if the OPENAI_API_KEY is set
 if [ -z "$OPENAI_API_KEY" ]; then
@@ -25,8 +26,12 @@ fi
 # Open the first terminal window and execute the first command for running the celery worker
 osascript -e 'tell application "Terminal" to do script "cd backend && celery --app app.tasks worker --loglevel INFO"'
 
+sleep 5
+
 # Open the second terminal window and execute the second command for running the FastAPI server
 osascript -e 'tell application "Terminal" to do script "cd backend && python main.py"'
+
+sleep 5
 
 # Open the third terminal window and execute the third command for running the React frontend
 osascript -e 'tell application "Terminal" to do script "cd frontend && npm install && npm run start"'

@@ -153,5 +153,10 @@ cython_debug/
 # Mac
 .DS_Store
 
+# NextJS
+nextjs/.next/
+nextjs/node_modules/
+nextjs/next-env.d.ts
+
 # Secrets
 secrets.sh

@@ -12,6 +12,7 @@ if (isDevelopment) {
   backendUrl = "http://localhost:8000"
 }
 
+
 function App() {
   console.log("App.js: App()");
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
