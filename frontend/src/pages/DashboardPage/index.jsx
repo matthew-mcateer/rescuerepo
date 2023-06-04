@@ -43,7 +43,7 @@ const DashboardPage = () => {
 
   const onSearch = (value) => {
     // Send the request to the "/create-dev-environment" endpoint
-    axios.post('/create-dev-environment', {
+    axios.post(backendUrl + '/create-dev-environment', {
       "githubRepoUrl": value,
       "githubAccessToken": accessToken,
       "email": email
