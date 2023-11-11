@@ -20,7 +20,6 @@ from langchain.schema import (
     SystemMessage
 )
 
-
 def authenticate_openai(openai_api_key: str) -> None:
     openai.api_key = openai_api_key
 

@@ -6,3 +6,4 @@
 -   **Ashenafee Mandefro,** Fourth-year Bioinformatics, Neuroscience, and Computer Science student
 -   **Shubhamai,** Full Stack Web Developer and ML Engineer.
 -   **Dhruv Malik,** buildL / consultant for web3 , generative AI and security auditor.
+

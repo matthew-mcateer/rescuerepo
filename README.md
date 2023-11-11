@@ -93,7 +93,7 @@ https://github.com/matthew-mcateer/rescuerepo/assets/16986576/a480ab0e-aca1-4dcf
 
 * [Python](https://www.python.org/)
 * [NextJS](https://nextjs.org/)
-* [OpenAI](https://pytorch.org/)
+* [OpenAI](https://openai.com/)
 * [FastAPI](https://fastapi.tiangolo.com/)
 * [React](https://reactjs.org/)
 * [LangChain](https://docs.langchain.com/docs/)
